@@ -198,3 +198,34 @@ function rollDice() {
 
 </body>
 </html>
+<script>
+function rollDice() {
+  const colors = [
+    "#f44336",
+    "#ff9800",
+    "#ffeb3b",
+    "#4caf50",
+    "#2196f3",
+    "#9c27b0"
+  ];
+
+  const dice = document.querySelectorAll(".die");
+  const special = (window.rolls = (window.rolls || 0) + 1) % 9 === 0;
+  const count = special
+    ? 3 + Math.floor(Math.random() * 2)
+    : 2 + Math.floor(Math.random() * 2);
+
+  const chosen = colors.sort(() => Math.random() - 0.5).slice(0, count);
+  const result = [];
+
+  for (let i = 0; i < 4; i++) {
+    result.push(chosen[i % count]);
+  }
+
+  result.sort(() => Math.random() - 0.5);
+
+  dice.forEach((die, i) => {
+    die.style.backgroundColor = result[i];
+  });
+}
+</script>
