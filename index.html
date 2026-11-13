@@ -229,3 +229,45 @@ function rollDice() {
   });
 }
 </script>
+<style>
+.history-roll {
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+  margin: 8px 0;
+}
+
+.history-die {
+  width: 24px;
+  height: 24px;
+  border-radius: 5px;
+  border: 2px solid white;
+}
+</style>
+
+<script>
+const oldRollDice = window.rollDice;
+
+window.rollDice = function() {
+  oldRollDice();
+
+  const dice = document.querySelectorAll(".die");
+  const historyBox = document.getElementById("history");
+
+  const row = document.createElement("div");
+  row.className = "history-roll";
+
+  dice.forEach(die => {
+    const square = document.createElement("div");
+    square.className = "history-die";
+    square.style.backgroundColor = die.style.backgroundColor;
+    row.appendChild(square);
+  });
+
+  historyBox.prepend(row);
+
+  while (historyBox.children.length > 25) {
+    historyBox.removeChild(historyBox.lastElementChild);
+  }
+};
+</script>
