@@ -2,13 +2,11 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>X0L3KZZ DICE</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -20,7 +18,6 @@ body {
 }
 
 h1 {
-  font-size: 32px;
   text-shadow: 2px 2px 4px black;
 }
 
@@ -28,7 +25,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 30px;
+  gap: 25px;
   flex-wrap: wrap;
 }
 
@@ -39,49 +36,43 @@ main {
 
 .dice {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
-  width: 100%;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
   margin: 30px auto;
 }
 
 .die {
-  width: 100%;
   aspect-ratio: 1;
-  background: #f44336;
+  min-width: 0;
   border-radius: 14px;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  background: white;
 }
 
 .dot {
-  width: 22%;
-  aspect-ratio: 1;
-  background: white;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
+  background: white;
 }
 
 button {
+  padding: 15px 35px;
   background: #222;
   color: white;
   border: 3px solid white;
   border-radius: 12px;
-  padding: 15px 35px;
   font-size: 20px;
   font-weight: bold;
   cursor: pointer;
 }
 
-button:active {
-  transform: scale(.96);
-}
-
 .history {
   margin: 25px auto;
-  max-width: 400px;
-  background: rgba(0,0,0,.18);
   padding: 12px;
+  background: rgba(0,0,0,.18);
   border-radius: 12px;
 }
 
@@ -93,17 +84,12 @@ button:active {
 .phrases img {
   width: 230px;
   max-width: 90vw;
-  height: auto;
 }
 
-@media (max-width: 650px) {
+@media(max-width:650px) {
   .layout {
     flex-direction: column;
     align-items: center;
-  }
-
-  main {
-    max-width: 440px;
   }
 }
 </style>
@@ -114,31 +100,31 @@ button:active {
 <h1>X0L3KZZ DICE</h1>
 
 <div class="layout">
-
 <main>
-  <div class="dice">
-    <div class="die"><div class="dot"></div></div>
-    <div class="die"><div class="dot"></div></div>
-    <div class="die"><div class="dot"></div></div>
-    <div class="die"><div class="dot"></div></div>
-  </div>
 
-  <button id="rollButton">ROLL DICE</button>
+<div class="dice">
+  <div class="die"><div class="dot"></div></div>
+  <div class="die"><div class="dot"></div></div>
+  <div class="die"><div class="dot"></div></div>
+  <div class="die"><div class="dot"></div></div>
+</div>
 
-  <div class="history">
-    <h2>HISTORY</h2>
-    <div id="history">No rolls yet</div>
-  </div>
+<button type="button" onclick="rollDice()">ROLL DICE</button>
+
+<div class="history">
+  <h2>HISTORY</h2>
+  <div id="history">No rolls yet</div>
+</div>
+
 </main>
 
 <aside class="phrases">
   <img src="dice-phrases.svg" alt="Trading phrases">
 </aside>
-
 </div>
 
 <script>
-const colors = [
+var colors = [
   "#f44336",
   "#ff9800",
   "#ffeb3b",
@@ -147,63 +133,67 @@ const colors = [
   "#9c27b0"
 ];
 
-let rolls = 0;
-let rollHistory = [];
+var rolls = 0;
+var rollHistory = [];
 
 function rollDice() {
   rolls++;
 
-  const special = rolls % 9 === 0;
-
-  const amount = special
+  var special = rolls % 9 === 0;
+  var amount = special
     ? 3 + Math.floor(Math.random() * 2)
     : 2 + Math.floor(Math.random() * 2);
 
-  const shuffledColors = [...colors];
+  var pool = colors.slice();
 
-  for (let i = shuffledColors.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffledColors[i], shuffledColors[j]] =
-      [shuffledColors[j], shuffledColors[i]];
+  for (var i = pool.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = pool[i];
+    pool[i] = pool[j];
+    pool[j] = temp;
   }
 
-  const selected = shuffledColors.slice(0, amount);
+  var selected = pool.slice(0, amount);
+  var result = [];
 
-  const result = [];
-
-  for (let i = 0; i < 4; i++) {
-    result.push(selected[i % selected.length]);
+  for (var i = 0; i < 4; i++) {
+    result.push(selected[i % amount]);
   }
 
-  for (let i = result.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [result[i], result[j]] = [result[j], result[i]];
+  for (var i = result.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = result[i];
+    result[i] = result[j];
+    result[j] = temp;
   }
 
-  const dice = document.querySelectorAll(".die");
+  var dice = document.querySelectorAll(".die");
 
-  dice.forEach((die, i) => {
-    die.style.backgroundColor = result[i];
+  for (var i = 0; i < 4; i++) {
+    dice[i].style.backgroundColor = result[i];
+  }
+
+  var numbers = result.map(function(color) {
+    return colors.indexOf(color) + 1;
   });
 
-  const names = result.map(color =>
-    colors.indexOf(color) + 1
-  );
-
-  rollHistory.unshift(names);
+  rollHistory.unshift(numbers);
 
   if (rollHistory.length > 25) {
     rollHistory.pop();
   }
 
-  document.getElementById("history").innerHTML =
-    rollHistory.map((item, index) =>
-      <div class="history-item">${rollHistory.length - index}. ${item.join(" - ")}</div>
-    ).join("");
-}
+  var historyHTML = "";
 
-document.getElementById("rollButton")
-  .addEventListener("click", rollDice);
+  for (var i = 0; i < rollHistory.length; i++) {
+    historyHTML += '<div class="history-item">' +
+      (rollHistory.length - i) + '. ' +
+      rollHistory[i].join(" - ") +
+      '</div>';
+  }
+
+  document.getElementById("history").innerHTML = historyHTML;
+}
 </script>
 
 </body>
