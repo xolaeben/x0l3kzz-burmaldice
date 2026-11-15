@@ -10,15 +10,74 @@
 
 body {
   margin: 0;
+  min-height: 100vh;
   padding: 20px;
-  background: #65dce8;
   font-family: Arial, sans-serif;
   text-align: center;
   color: white;
+  background: #17172c;
+  background-attachment: fixed;
+  transition: background 0.4s;
+}
+
+body.cosmos {
+  background: radial-gradient(ellipse at top, #673ab7, #15102e 65%, #050511);
+}
+
+body.neon {
+  background: linear-gradient(135deg, #090019, #17104a, #001e35);
+}
+
+body.winter {
+  background: linear-gradient(135deg, #d6f4ff, #438bc5, #142d58);
+}
+
+body.summer {
+  background: linear-gradient(135deg, #ffe66d, #ff9b42, #27b9a1);
+}
+
+body.hell {
+  background: radial-gradient(ellipse at bottom, #ff4b00, #720000 45%, #170000);
+}
+
+body.heaven {
+  background: linear-gradient(135deg, #e7f8ff, #9bceff, #f5d8ff);
+}
+
+body.king {
+  background:
+    radial-gradient(circle at 50% 20%, #b58a36, transparent 35%),
+    linear-gradient(135deg, #100b27, #44216b, #100b27);
 }
 
 h1 {
-  text-shadow: 2px 2px 4px black;
+  font-size: clamp(30px, 7vw, 48px);
+  letter-spacing: 4px;
+  color: #fff1bd;
+  text-shadow: 0 0 10px #e6b84e, 0 0 25px #9b5bff,
+               3px 3px 4px black;
+  margin: 15px 0 25px;
+}
+
+.theme-box {
+  margin: 15px auto 25px;
+}
+
+.theme-box h2 {
+  font-size: 19px;
+  letter-spacing: 2px;
+}
+
+select {
+  width: 220px;
+  max-width: 90%;
+  padding: 13px;
+  border: 2px solid white;
+  border-radius: 12px;
+  background: #17152b;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .layout {
@@ -69,21 +128,65 @@ button {
   cursor: pointer;
 }
 
+button:active {
+  transform: scale(.96);
+}
+
 .history {
   margin: 25px auto;
   padding: 12px;
-  background: rgba(0,0,0,.18);
+  background: rgba(0,0,0,.25);
+  border: 1px solid rgba(255,255,255,.2);
   border-radius: 12px;
 }
 
 .history-item {
-  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 3px;
   border-bottom: 1px solid rgba(255,255,255,.25);
+}
+
+.history-roll {
+  display: flex;
+  gap: 5px;
+}
+
+.history-die {
+  width: 23px;
+  height: 23px;
+  border-radius: 5px;
+  border: 1px solid white;
 }
 
 .phrases img {
   width: 230px;
   max-width: 90vw;
+}
+
+.king-decoration {
+  display: none;
+  margin: 15px auto;
+  font-size: 45px;
+  text-shadow: 0 0 15px gold;
+}
+
+body.king .king-decoration {
+  display: block;
+}
+
+body.heaven {
+  color: #172b50;
+}
+
+body.winter {
+  color: #102d4d;
+}
+
+body.summer {
+  color: #422600;
 }
 
 @media(max-width:650px) {
@@ -95,9 +198,25 @@ button {
 </style>
 </head>
 
-<body>
+<body class="cosmos">
 
 <h1>X0L3KZZ DICE</h1>
+
+<div class="theme-box">
+  <h2>BACKGROUND</h2>
+
+  <select id="themeSelect" onchange="changeTheme(this.value)">
+    <option value="cosmos">🌌 COSMOS</option>
+    <option value="neon">💜 NEON</option>
+    <option value="winter">❄️ WINTER</option>
+    <option value="summer">☀️ SUMMER</option>
+    <option value="hell">🔥 HELL</option>
+    <option value="heaven">😇 HEAVEN</option>
+    <option value="king">👑 KING</option>
+  </select>
+</div>
+
+<div class="king-decoration">👑 ✨ 👑</div>
 
 <div class="layout">
 <main>
@@ -110,7 +229,6 @@ button {
 </div>
 
 <button type="button" onclick="rollDice()">ROLL DICE</button>
-
 <div class="history">
   <h2>HISTORY</h2>
   <div id="history">No rolls yet</div>
@@ -136,10 +254,35 @@ var colors = [
 var rolls = 0;
 var rollHistory = [];
 
+function changeTheme(theme) {
+  var allowed = [
+    "cosmos", "neon", "winter",
+    "summer", "hell", "heaven", "king"
+  ];
+
+  if (!allowed.includes(theme)) return;
+
+  document.body.className = theme;
+
+  try {
+    localStorage.setItem("x0l3kzzTheme", theme);
+  } catch (e) {}
+}
+
+try {
+  var savedTheme = localStorage.getItem("x0l3kzzTheme");
+
+  if (savedTheme) {
+    changeTheme(savedTheme);
+    document.getElementById("themeSelect").value = savedTheme;
+  }
+} catch (e) {}
+
 function rollDice() {
   rolls++;
 
   var special = rolls % 9 === 0;
+
   var amount = special
     ? 3 + Math.floor(Math.random() * 2)
     : 2 + Math.floor(Math.random() * 2);
@@ -177,7 +320,10 @@ function rollDice() {
     return colors.indexOf(color) + 1;
   });
 
-  rollHistory.unshift(numbers);
+  rollHistory.unshift({
+    numbers: numbers,
+    colors: result.slice()
+  });
 
   if (rollHistory.length > 25) {
     rollHistory.pop();
@@ -186,10 +332,21 @@ function rollDice() {
   var historyHTML = "";
 
   for (var i = 0; i < rollHistory.length; i++) {
-    historyHTML += '<div class="history-item">' +
-      (rollHistory.length - i) + '. ' +
-      rollHistory[i].join(" - ") +
-      '</div>';
+    var item = rollHistory[i];
+
+    historyHTML +=
+      '<div class="history-item">' +
+      '<span>' + (rolls - i) + '.</span>' +
+      '<span>' + item.numbers.join(" - ") + '</span>' +
+      '<div class="history-roll">';
+
+    for (var j = 0; j < 4; j++) {
+      historyHTML +=
+        '<div class="history-die" style="background:' +
+        item.colors[j] + '"></div>';
+    }
+
+    historyHTML += '</div></div>';
   }
 
   document.getElementById("history").innerHTML = historyHTML;
@@ -198,76 +355,3 @@ function rollDice() {
 
 </body>
 </html>
-<script>
-function rollDice() {
-  const colors = [
-    "#f44336",
-    "#ff9800",
-    "#ffeb3b",
-    "#4caf50",
-    "#2196f3",
-    "#9c27b0"
-  ];
-
-  const dice = document.querySelectorAll(".die");
-  const special = (window.rolls = (window.rolls || 0) + 1) % 9 === 0;
-  const count = special
-    ? 3 + Math.floor(Math.random() * 2)
-    : 2 + Math.floor(Math.random() * 2);
-
-  const chosen = colors.sort(() => Math.random() - 0.5).slice(0, count);
-  const result = [];
-
-  for (let i = 0; i < 4; i++) {
-    result.push(chosen[i % count]);
-  }
-
-  result.sort(() => Math.random() - 0.5);
-
-  dice.forEach((die, i) => {
-    die.style.backgroundColor = result[i];
-  });
-}
-</script>
-<style>
-.history-roll {
-  display: flex;
-  justify-content: center;
-  gap: 7px;
-  margin: 8px 0;
-}
-
-.history-die {
-  width: 24px;
-  height: 24px;
-  border-radius: 5px;
-  border: 2px solid white;
-}
-</style>
-
-<script>
-const oldRollDice = window.rollDice;
-
-window.rollDice = function() {
-  oldRollDice();
-
-  const dice = document.querySelectorAll(".die");
-  const historyBox = document.getElementById("history");
-
-  const row = document.createElement("div");
-  row.className = "history-roll";
-
-  dice.forEach(die => {
-    const square = document.createElement("div");
-    square.className = "history-die";
-    square.style.backgroundColor = die.style.backgroundColor;
-    row.appendChild(square);
-  });
-
-  historyBox.prepend(row);
-
-  while (historyBox.children.length > 25) {
-    historyBox.removeChild(historyBox.lastElementChild);
-  }
-};
-</script>
