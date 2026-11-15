@@ -20,66 +20,41 @@ body {
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-color: #15102e;
-  transition: background-image .3s;
 }
 
 /* BACKGROUNDS */
 
 body.cosmos {
-  background-image:
-  linear-gradient(#08051a66,#08051a99),
+  background-image: linear-gradient(#08051a66,#08051a99),
   url("https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1600");
 }
 
 body.winter {
-  background-image:
-  linear-gradient(#05234133,#05234166),
+  background-image: linear-gradient(#05234133,#05234166),
   url("https://images.unsplash.com/photo-1418985991508-e47386d96a71?w=1600");
 }
 
 body.summer {
-  background-image:
-  linear-gradient(#32200022,#32200055),
+  background-image: linear-gradient(#32200022,#32200055),
   url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600");
 }
 
 body.hell {
-  background-image:
-  linear-gradient(#28000044,#28000099),
+  background-image: linear-gradient(#28000044,#28000099),
   url("https://images.unsplash.com/photo-1475738198235-4b30fc6a2d9c?w=1600");
 }
 
 body.heaven {
-  background-image:
-  linear-gradient(#1e325522,#1e325544),
+  background-image: linear-gradient(#1e325522,#1e325544),
   url("https://images.unsplash.com/photo-1534088568595-a066f410bcda?w=1600");
 }
 
 body.king {
-  background-image:
-  linear-gradient(#10051c44,#10051c88),
+  background-image: linear-gradient(#10051c44,#10051c88),
   url("https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1600");
 }
 
-body.blood {
-  background-image:
-  linear-gradient(#25000055,#100000aa),
-  url("https://images.unsplash.com/photo-1518709594023-6eab9bab7b23?w=1600");
-}
-
-body.galaxy {
-  background-image:
-  linear-gradient(#10002244,#080014aa),
-  url("https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=1600");
-}
-
-body.matrix {
-  background-image:
-  linear-gradient(#00150066,#000900bb),
-  url("https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600");
-}
-
-/* GOLD - LUCKY ROLL */
+/* GOLD */
 
 body.gold {
   background-image:
@@ -107,10 +82,10 @@ body.king h1 {
 
 body.gold h1 {
   color: #fff1a8;
-  text-shadow: 0 0 15px gold, 0 0 35px orange;
+  text-shadow: 0 0 15px gold, 0 0 30px orange;
 }
 
-/* THEME SELECTOR */
+/* BACKGROUND SELECTOR */
 
 .theme-box {
   margin: 15px auto 25px;
@@ -166,7 +141,6 @@ main {
   justify-content: center;
   align-items: center;
   background: white;
-  transition: box-shadow .3s;
 }
 
 .dot {
@@ -219,7 +193,8 @@ button:disabled {
 }
 
 /* HISTORY */
-  .history {
+
+.history {
   margin: 25px auto;
   padding: 12px;
   background: rgba(0,0,0,.35);
@@ -252,8 +227,7 @@ button:disabled {
   border-radius: 6px;
   border: 2px solid white;
 }
-
-.history-lucky {
+  .history-lucky {
   color: gold;
   font-size: 13px;
   font-weight: bold;
@@ -360,9 +334,6 @@ button:disabled {
     <option value="hell">🔥 HELL</option>
     <option value="heaven">😇 HEAVEN</option>
     <option value="king">👑 KING</option>
-    <option value="blood">🩸 BLOOD</option>
-    <option value="galaxy">🌌 GALAXY</option>
-    <option value="matrix">💚 MATRIX</option>
     <option value="gold" disabled>🏆 GOLD (LUCKY ONLY)</option>
   </select>
 </div>
@@ -417,6 +388,7 @@ var colors = [
   "#9c27b0"
 ];
 
+var rolls = 0;
 var rollHistory = [];
 var isRolling = false;
 var audioContext = null;
@@ -424,16 +396,15 @@ var soundTimer = null;
 
 var currentTheme = "cosmos";
 var luckyTimer = null;
-var luckyThemeLocked = false;
 var previousTheme = "cosmos";
 
 /* BACKGROUND */
 
 function changeTheme(theme) {
+
   var allowed = [
     "cosmos","winter","summer",
-    "hell","heaven","king",
-    "blood","galaxy","matrix"
+    "hell","heaven","king"
   ];
 
   if (!allowed.includes(theme)) return;
@@ -451,19 +422,13 @@ function changeTheme(theme) {
 /* LOAD BACKGROUND */
 
 try {
+
   var savedTheme = localStorage.getItem("x0l3kzzTheme");
 
   if (savedTheme) {
-    var allowedThemes = [
-      "cosmos","winter","summer",
-      "hell","heaven","king",
-      "blood","galaxy","matrix"
-    ];
-
-    if (allowedThemes.includes(savedTheme)) {
-      changeTheme(savedTheme);
-    }
+    changeTheme(savedTheme);
   }
+
 } catch(e) {}
 
 /* LUCKY BACKGROUND */
@@ -471,12 +436,8 @@ try {
 function activateLuckyBackground() {
 
   previousTheme = currentTheme;
-  luckyThemeLocked = true;
 
   document.body.className = "gold";
-
-  // GOLD cannot be manually selected.
-  // The user can switch to any other background.
 
   if (luckyTimer) {
     clearTimeout(luckyTimer);
@@ -485,11 +446,11 @@ function activateLuckyBackground() {
   luckyTimer = setTimeout(function() {
 
     if (document.body.classList.contains("gold")) {
-      document.body.className = previousTheme;
-      document.getElementById("themeSelect").value = previousTheme;
-      currentTheme = previousTheme;
-    }
 
+      document.body.className = currentTheme;
+
+      document.getElementById("themeSelect").value = currentTheme;
+    }
     luckyTimer = null;
 
   }, 180000);
@@ -498,7 +459,9 @@ function activateLuckyBackground() {
 /* SOUND */
 
 function startSound() {
+
   try {
+
     var AudioContextClass =
       window.AudioContext || window.webkitAudioContext;
 
@@ -563,6 +526,7 @@ function stopSound() {
 function shuffle(array) {
 
   for (var i = array.length - 1; i > 0; i--) {
+
     var j = Math.floor(Math.random() * (i + 1));
 
     var temp = array[i];
@@ -575,13 +539,13 @@ function shuffle(array) {
 
 /* GENERATE RESULT */
 
-function generateResult(isLucky) {
+function generateResult(isLucky, guaranteed) {
 
   var result = [];
 
-  if (isLucky) {
+  if (isLucky || guaranteed) {
 
-    // All four colors are guaranteed to be different.
+    // Four guaranteed different colors.
 
     var pool = shuffle(colors.slice());
 
@@ -608,11 +572,12 @@ function generateResult(isLucky) {
 
 /* UPDATE HISTORY */
 
-function updateHistory(result, isLucky) {
+function updateHistory(result, isLucky, guaranteed) {
 
   rollHistory.unshift({
     colors: result.slice(),
-    lucky: isLucky
+    lucky: isLucky,
+    guaranteed: guaranteed
   });
 
   if (rollHistory.length > 25) {
@@ -627,6 +592,8 @@ function updateHistory(result, isLucky) {
 
     if (rollHistory[i].lucky) {
       html += '<div class="history-lucky">✨ LUCKY ROLL ✨</div>';
+    } else if (rollHistory[i].guaranteed) {
+      html += '<div class="history-lucky">⭐ 4 COLORS GUARANTEED</div>';
     }
 
     html += '<div class="history-roll">';
@@ -655,25 +622,36 @@ function rollDice() {
 
   var button = document.getElementById("rollButton");
   var screen = document.getElementById("rollScreen");
+
   var dice = document.querySelectorAll(".die");
   var rollingDice = document.querySelectorAll(".rolling-die");
   var luckyLabel = document.getElementById("luckyLabel");
 
   button.disabled = true;
 
-  // 5% chance
+  // Count every roll.
 
-  var isLucky = Math.random() < 0.05;
+  rolls++;
 
-  // Remove previous glow
+  // 3% Lucky Roll chance.
+
+  var isLucky = Math.random() < 0.03;
+
+  // Every sixth roll guarantees four different colors.
+
+  var guaranteed = rolls % 6 === 0;
 
   dice.forEach(function(die) {
+
     die.classList.remove("lucky-glow");
     die.style.backgroundColor = "#858585";
+
   });
 
   rollingDice.forEach(function(die) {
+
     die.classList.toggle("lucky-glow", isLucky);
+
   });
 
   luckyLabel.classList.remove("active");
@@ -686,24 +664,24 @@ function rollDice() {
 
   startSound();
 
-  var result = generateResult(isLucky);
+  var result = generateResult(isLucky, guaranteed);
 
-  // Animation lasts exactly 1 second.
+  // Animation: exactly 1 second.
 
   setTimeout(function() {
 
     stopSound();
 
     dice.forEach(function(die, i) {
-
       die.style.backgroundColor = result[i];
 
       if (isLucky) {
         die.classList.add("lucky-glow");
       }
+
     });
 
-    updateHistory(result, isLucky);
+    updateHistory(result, isLucky, guaranteed);
 
     screen.classList.remove("active");
 
