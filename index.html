@@ -6,7 +6,9 @@
 <title>X0L3KZZ DICE</title>
 
 <style>
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -15,49 +17,77 @@ body {
   font-family: Arial, sans-serif;
   text-align: center;
   color: white;
-  background: #17172c;
+  background-size: cover;
+  background-position: center;
   background-attachment: fixed;
-  transition: background 0.4s;
+  background-repeat: no-repeat;
+  transition: background-image .4s;
+  background-color: #15102e;
 }
 
+/* THEMES */
+
 body.cosmos {
-  background: radial-gradient(ellipse at top, #673ab7, #15102e 65%, #050511);
+  background-image:
+    linear-gradient(rgba(10,5,35,.35),rgba(10,5,35,.55)),
+    url("https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1600");
 }
 
 body.neon {
-  background: linear-gradient(135deg, #090019, #17104a, #001e35);
+  background-image:
+    linear-gradient(rgba(5,0,20,.4),rgba(5,0,20,.55)),
+    url("https://images.unsplash.com/photo-1535223289827-42f1e9919769?w=1600");
 }
 
 body.winter {
-  background: linear-gradient(135deg, #d6f4ff, #438bc5, #142d58);
+  background-image:
+    linear-gradient(rgba(5,35,65,.2),rgba(5,35,65,.4)),
+    url("https://images.unsplash.com/photo-1418985991508-e47386d96a71?w=1600");
 }
 
 body.summer {
-  background: linear-gradient(135deg, #ffe66d, #ff9b42, #27b9a1);
+  background-image:
+    linear-gradient(rgba(50,30,0,.15),rgba(50,30,0,.35)),
+    url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600");
 }
 
 body.hell {
-  background: radial-gradient(ellipse at bottom, #ff4b00, #720000 45%, #170000);
+  background-image:
+    linear-gradient(rgba(40,0,0,.3),rgba(40,0,0,.55)),
+    url("https://images.unsplash.com/photo-1475738198235-4b30fc6a2d9c?w=1600");
 }
 
 body.heaven {
-  background: linear-gradient(135deg, #e7f8ff, #9bceff, #f5d8ff);
+  background-image:
+    linear-gradient(rgba(30,50,90,.15),rgba(30,50,90,.3)),
+    url("https://images.unsplash.com/photo-1534088568595-a066f410bcda?w=1600");
 }
 
 body.king {
-  background:
-    radial-gradient(circle at 50% 20%, #b58a36, transparent 35%),
-    linear-gradient(135deg, #100b27, #44216b, #100b27);
+  background-image:
+    linear-gradient(rgba(15,5,25,.3),rgba(15,5,25,.55)),
+    url("https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1600");
 }
+
+/* HEADER */
 
 h1 {
   font-size: clamp(30px, 7vw, 48px);
   letter-spacing: 4px;
-  color: #fff1bd;
-  text-shadow: 0 0 10px #e6b84e, 0 0 25px #9b5bff,
-               3px 3px 4px black;
+  color: #fff0bd;
+  text-shadow:
+    0 0 10px #e6b84e,
+    0 0 25px #a34dff,
+    3px 3px 4px black;
   margin: 15px 0 25px;
 }
+
+body.king h1 {
+  color: #ffd76b;
+  text-shadow: 0 0 15px gold, 0 0 30px orange;
+}
+
+/* BACKGROUND SELECTOR */
 
 .theme-box {
   margin: 15px auto 25px;
@@ -66,10 +96,11 @@ h1 {
 .theme-box h2 {
   font-size: 19px;
   letter-spacing: 2px;
+  text-shadow: 2px 2px 4px black;
 }
 
 select {
-  width: 220px;
+  width: 230px;
   max-width: 90%;
   padding: 13px;
   border: 2px solid white;
@@ -79,6 +110,8 @@ select {
   font-size: 16px;
   font-weight: bold;
 }
+
+/* LAYOUT */
 
 .layout {
   display: flex;
@@ -92,6 +125,8 @@ main {
   width: 100%;
   max-width: 440px;
 }
+
+/* DICE */
 
 .dice {
   display: grid;
@@ -117,9 +152,11 @@ main {
   background: white;
 }
 
+/* BUTTON */
+
 button {
   padding: 15px 35px;
-  background: #222;
+  background: #17121f;
   color: white;
   border: 3px solid white;
   border-radius: 12px;
@@ -132,44 +169,47 @@ button:active {
   transform: scale(.96);
 }
 
+/* HISTORY */
+
 .history {
   margin: 25px auto;
   padding: 12px;
-  background: rgba(0,0,0,.25);
-  border: 1px solid rgba(255,255,255,.2);
+  background: rgba(0,0,0,.35);
+  border: 1px solid rgba(255,255,255,.3);
   border-radius: 12px;
+}
+
+.history h2 {
+  text-shadow: 2px 2px 4px black;
 }
 
 .history-item {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center;
   gap: 8px;
-  padding: 8px 3px;
+  padding: 9px;
   border-bottom: 1px solid rgba(255,255,255,.25);
 }
 
 .history-roll {
   display: flex;
-  gap: 5px;
+  justify-content: center;
+  gap: 7px;
 }
 
 .history-die {
-  width: 23px;
-  height: 23px;
-  border-radius: 5px;
-  border: 1px solid white;
+  width: 27px;
+  height: 27px;
+  border-radius: 6px;
+  border: 2px solid white;
 }
 
-.phrases img {
-  width: 230px;
-  max-width: 90vw;
-}
+/* KING DECORATION */
 
 .king-decoration {
   display: none;
-  margin: 15px auto;
-  font-size: 45px;
+  font-size: 35px;
+  margin: 10px;
   text-shadow: 0 0 15px gold;
 }
 
@@ -177,16 +217,9 @@ body.king .king-decoration {
   display: block;
 }
 
-body.heaven {
-  color: #172b50;
-}
-
-body.winter {
-  color: #102d4d;
-}
-
-body.summer {
-  color: #422600;
+.phrases img {
+  width: 230px;
+  max-width: 90vw;
 }
 
 @media(max-width:650px) {
@@ -201,7 +234,6 @@ body.summer {
 <body class="cosmos">
 
 <h1>X0L3KZZ DICE</h1>
-
 <div class="theme-box">
   <h2>BACKGROUND</h2>
 
@@ -219,6 +251,7 @@ body.summer {
 <div class="king-decoration">👑 ✨ 👑</div>
 
 <div class="layout">
+
 <main>
 
 <div class="dice">
@@ -228,7 +261,10 @@ body.summer {
   <div class="die"><div class="dot"></div></div>
 </div>
 
-<button type="button" onclick="rollDice()">ROLL DICE</button>
+<button type="button" onclick="rollDice()">
+  ROLL DICE
+</button>
+
 <div class="history">
   <h2>HISTORY</h2>
   <div id="history">No rolls yet</div>
@@ -239,9 +275,11 @@ body.summer {
 <aside class="phrases">
   <img src="dice-phrases.svg" alt="Trading phrases">
 </aside>
+
 </div>
 
 <script>
+
 var colors = [
   "#f44336",
   "#ff9800",
@@ -254,10 +292,17 @@ var colors = [
 var rolls = 0;
 var rollHistory = [];
 
+/* CHANGE BACKGROUND */
+
 function changeTheme(theme) {
   var allowed = [
-    "cosmos", "neon", "winter",
-    "summer", "hell", "heaven", "king"
+    "cosmos",
+    "neon",
+    "winter",
+    "summer",
+    "hell",
+    "heaven",
+    "king"
   ];
 
   if (!allowed.includes(theme)) return;
@@ -266,8 +311,10 @@ function changeTheme(theme) {
 
   try {
     localStorage.setItem("x0l3kzzTheme", theme);
-  } catch (e) {}
+  } catch(e) {}
 }
+
+/* LOAD SAVED BACKGROUND */
 
 try {
   var savedTheme = localStorage.getItem("x0l3kzzTheme");
@@ -276,9 +323,12 @@ try {
     changeTheme(savedTheme);
     document.getElementById("themeSelect").value = savedTheme;
   }
-} catch (e) {}
+} catch(e) {}
+
+/* ROLL DICE */
 
 function rollDice() {
+
   rolls++;
 
   var special = rolls % 9 === 0;
@@ -316,41 +366,37 @@ function rollDice() {
     dice[i].style.backgroundColor = result[i];
   }
 
-  var numbers = result.map(function(color) {
-    return colors.indexOf(color) + 1;
-  });
+  /* SAVE HISTORY */
 
-  rollHistory.unshift({
-    numbers: numbers,
-    colors: result.slice()
-  });
+  rollHistory.unshift(result.slice());
 
   if (rollHistory.length > 25) {
     rollHistory.pop();
   }
 
+  /* HISTORY - ONLY COLORED SQUARES */
+
   var historyHTML = "";
 
   for (var i = 0; i < rollHistory.length; i++) {
-    var item = rollHistory[i];
 
-    historyHTML +=
-      '<div class="history-item">' +
-      '<span>' + (rolls - i) + '.</span>' +
-      '<span>' + item.numbers.join(" - ") + '</span>' +
-      '<div class="history-roll">';
+    historyHTML += '<div class="history-item">';
+    historyHTML += '<div class="history-roll">';
 
     for (var j = 0; j < 4; j++) {
       historyHTML +=
         '<div class="history-die" style="background:' +
-        item.colors[j] + '"></div>';
+        rollHistory[i][j] +
+        '"></div>';
     }
 
-    historyHTML += '</div></div>';
+    historyHTML += '</div>';
+    historyHTML += '</div>';
   }
 
   document.getElementById("history").innerHTML = historyHTML;
 }
+
 </script>
 
 </body>
