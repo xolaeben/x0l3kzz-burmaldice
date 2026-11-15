@@ -22,16 +22,9 @@ body {
   background-color: #15102e;
 }
 
-/* BACKGROUNDS */
-
 body.cosmos {
   background-image: linear-gradient(#08051a66,#08051a99),
   url("https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1600");
-}
-
-body.neon {
-  background-image: linear-gradient(#05001466,#05001499),
-  url("https://images.unsplash.com/photo-1535223289827-42f1e9919769?w=1600");
 }
 
 body.winter {
@@ -59,8 +52,6 @@ body.king {
   url("https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1600");
 }
 
-/* HEADER */
-
 h1 {
   font-size: clamp(30px, 7vw, 48px);
   letter-spacing: 4px;
@@ -75,8 +66,6 @@ body.king h1 {
   color: #ffd76b;
   text-shadow: 0 0 15px gold, 0 0 30px orange;
 }
-
-/* BACKGROUND SELECTOR */
 
 .theme-box {
   margin: 15px auto 25px;
@@ -100,8 +89,6 @@ select {
   font-weight: bold;
 }
 
-/* LAYOUT */
-
 .layout {
   display: flex;
   justify-content: center;
@@ -114,8 +101,6 @@ main {
   width: 100%;
   max-width: 440px;
 }
-
-/* DICE */
 
 .dice {
   display: grid;
@@ -141,8 +126,6 @@ main {
   background: white;
 }
 
-/* BUTTON */
-
 button {
   padding: 15px 35px;
   background: #17121f;
@@ -158,8 +141,6 @@ button:disabled {
   opacity: .5;
   cursor: wait;
 }
-
-/* HISTORY */
 
 .history {
   margin: 25px auto;
@@ -217,6 +198,8 @@ body.king .king-decoration {
   inset: 0;
   z-index: 9999;
   background: rgba(0,0,0,.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   justify-content: center;
   align-items: center;
   padding: 20px;
@@ -232,7 +215,8 @@ body.king .king-decoration {
   grid-template-columns: repeat(4, 1fr);
   gap: 8px;
 }
-  .rolling-die {
+
+.rolling-die {
   aspect-ratio: 1;
   border-radius: 14px;
   background: #858585;
@@ -241,8 +225,7 @@ body.king .king-decoration {
   align-items: center;
   animation: shake .16s infinite alternate;
 }
-
-.rolling-die:nth-child(2) {
+  .rolling-die:nth-child(2) {
   animation-delay: .04s;
 }
 
@@ -288,7 +271,6 @@ body.king .king-decoration {
 
   <select id="themeSelect" onchange="changeTheme(this.value)">
     <option value="cosmos">🌌 COSMOS</option>
-    <option value="neon">💜 NEON</option>
     <option value="winter">❄️ WINTER</option>
     <option value="summer">☀️ SUMMER</option>
     <option value="hell">🔥 HELL</option>
@@ -325,8 +307,6 @@ body.king .king-decoration {
 </aside>
 </div>
 
-<!-- ROLL ANIMATION SCREEN -->
-
 <div id="rollScreen">
   <div class="rolling-dice">
     <div class="rolling-die"><div class="rolling-dot"></div></div>
@@ -337,7 +317,6 @@ body.king .king-decoration {
 </div>
 
 <script>
-
 var colors = [
   "#f44336",
   "#ff9800",
@@ -353,12 +332,10 @@ var isRolling = false;
 var audioContext = null;
 var soundTimer = null;
 
-/* BACKGROUND */
-
 function changeTheme(theme) {
   var allowed = [
-    "cosmos","neon","winter",
-    "summer","hell","heaven","king"
+    "cosmos","winter","summer",
+    "hell","heaven","king"
   ];
 
   if (!allowed.includes(theme)) return;
@@ -370,8 +347,6 @@ function changeTheme(theme) {
   } catch(e) {}
 }
 
-/* LOAD BACKGROUND */
-
 try {
   var savedTheme = localStorage.getItem("x0l3kzzTheme");
 
@@ -380,8 +355,6 @@ try {
     document.getElementById("themeSelect").value = savedTheme;
   }
 } catch(e) {}
-
-/* SOUND */
 
 function startSound() {
   try {
@@ -442,8 +415,7 @@ function stopSound() {
   }
 }
 
-/* GENERATE RESULT */
-  function generateResult() {
+function generateResult() {
   rolls++;
 
   var special = rolls % 9 === 0;
@@ -453,7 +425,6 @@ function stopSound() {
     : 2 + Math.floor(Math.random() * 2);
 
   var pool = colors.slice();
-
   for (var i = pool.length - 1; i > 0; i--) {
     var j = Math.floor(Math.random() * (i + 1));
     var temp = pool[i];
@@ -477,8 +448,6 @@ function stopSound() {
 
   return result;
 }
-
-/* UPDATE HISTORY */
 
 function updateHistory(result) {
   rollHistory.unshift(result.slice());
@@ -506,8 +475,6 @@ function updateHistory(result) {
   document.getElementById("history").innerHTML = html;
 }
 
-/* ROLL DICE */
-
 function rollDice() {
   if (isRolling) return;
 
@@ -519,34 +486,25 @@ function rollDice() {
 
   button.disabled = true;
 
-  // Turn original dice grey
   dice.forEach(function(die) {
     die.style.backgroundColor = "#858585";
   });
 
-  // Show only the selected background and four grey dice
   screen.classList.add("active");
 
-  // Start electronic sound
   startSound();
 
-  // Generate result
   var result = generateResult();
 
-  // Finish after 2 seconds
   setTimeout(function() {
-
     stopSound();
 
-    // Put final colors on dice
     dice.forEach(function(die, i) {
       die.style.backgroundColor = result[i];
     });
 
-    // Update history
     updateHistory(result);
 
-    // Restore interface
     screen.classList.remove("active");
 
     button.disabled = false;
@@ -554,7 +512,6 @@ function rollDice() {
 
   }, 2000);
 }
-
 </script>
 
 </body>
