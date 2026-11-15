@@ -20,38 +20,72 @@ body {
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-color: #15102e;
+  transition: background-image .3s;
 }
 
 /* BACKGROUNDS */
 
 body.cosmos {
-  background-image: linear-gradient(#08051a66,#08051a99),
+  background-image:
+  linear-gradient(#08051a66,#08051a99),
   url("https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1600");
 }
 
 body.winter {
-  background-image: linear-gradient(#05234133,#05234166),
+  background-image:
+  linear-gradient(#05234133,#05234166),
   url("https://images.unsplash.com/photo-1418985991508-e47386d96a71?w=1600");
 }
 
 body.summer {
-  background-image: linear-gradient(#32200022,#32200055),
+  background-image:
+  linear-gradient(#32200022,#32200055),
   url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600");
 }
 
 body.hell {
-  background-image: linear-gradient(#28000044,#28000099),
+  background-image:
+  linear-gradient(#28000044,#28000099),
   url("https://images.unsplash.com/photo-1475738198235-4b30fc6a2d9c?w=1600");
 }
 
 body.heaven {
-  background-image: linear-gradient(#1e325522,#1e325544),
+  background-image:
+  linear-gradient(#1e325522,#1e325544),
   url("https://images.unsplash.com/photo-1534088568595-a066f410bcda?w=1600");
 }
 
 body.king {
-  background-image: linear-gradient(#10051c44,#10051c88),
+  background-image:
+  linear-gradient(#10051c44,#10051c88),
   url("https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1600");
+}
+
+body.blood {
+  background-image:
+  linear-gradient(#25000055,#100000aa),
+  url("https://images.unsplash.com/photo-1518709594023-6eab9bab7b23?w=1600");
+}
+
+body.galaxy {
+  background-image:
+  linear-gradient(#10002244,#080014aa),
+  url("https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=1600");
+}
+
+body.matrix {
+  background-image:
+  linear-gradient(#00150066,#000900bb),
+  url("https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600");
+}
+
+/* GOLD - LUCKY ROLL */
+
+body.gold {
+  background-image:
+  radial-gradient(ellipse at center, #8a6415aa, #241400ee),
+  linear-gradient(135deg,#f9d976,#9c6800);
+  background-color: #8a6415;
 }
 
 /* HEADER */
@@ -71,7 +105,12 @@ body.king h1 {
   text-shadow: 0 0 15px gold, 0 0 30px orange;
 }
 
-/* BACKGROUND SELECTOR */
+body.gold h1 {
+  color: #fff1a8;
+  text-shadow: 0 0 15px gold, 0 0 35px orange;
+}
+
+/* THEME SELECTOR */
 
 .theme-box {
   margin: 15px auto 25px;
@@ -127,6 +166,7 @@ main {
   justify-content: center;
   align-items: center;
   background: white;
+  transition: box-shadow .3s;
 }
 
 .dot {
@@ -134,6 +174,30 @@ main {
   height: 20px;
   border-radius: 50%;
   background: white;
+}
+
+/* LUCKY GLOW */
+
+.die.lucky-glow {
+  box-shadow:
+    0 0 10px gold,
+    0 0 25px gold,
+    0 0 45px orange;
+  outline: 3px solid #ffdf70;
+}
+
+.lucky-label {
+  display: none;
+  color: #ffe28a;
+  font-weight: bold;
+  font-size: 21px;
+  letter-spacing: 3px;
+  margin: 10px;
+  text-shadow: 0 0 10px gold, 0 0 20px orange;
+}
+
+.lucky-label.active {
+  display: block;
 }
 
 /* BUTTON */
@@ -155,8 +219,7 @@ button:disabled {
 }
 
 /* HISTORY */
-
-.history {
+  .history {
   margin: 25px auto;
   padding: 12px;
   background: rgba(0,0,0,.35);
@@ -171,6 +234,8 @@ button:disabled {
 .history-item {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
   padding: 9px;
   border-bottom: 1px solid rgba(255,255,255,.25);
 }
@@ -186,6 +251,14 @@ button:disabled {
   height: 27px;
   border-radius: 6px;
   border: 2px solid white;
+}
+
+.history-lucky {
+  color: gold;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-shadow: 0 0 8px orange;
 }
 
 .phrases img {
@@ -228,7 +301,15 @@ button:disabled {
   align-items: center;
   animation: shake .16s infinite alternate;
 }
-  .rolling-die:nth-child(2) {
+
+.rolling-die.lucky-glow {
+  box-shadow:
+    0 0 12px gold,
+    0 0 30px orange;
+  outline: 3px solid gold;
+}
+
+.rolling-die:nth-child(2) {
   animation-delay: .04s;
 }
 
@@ -279,6 +360,10 @@ button:disabled {
     <option value="hell">🔥 HELL</option>
     <option value="heaven">😇 HEAVEN</option>
     <option value="king">👑 KING</option>
+    <option value="blood">🩸 BLOOD</option>
+    <option value="galaxy">🌌 GALAXY</option>
+    <option value="matrix">💚 MATRIX</option>
+    <option value="gold" disabled>🏆 GOLD (LUCKY ONLY)</option>
   </select>
 </div>
 
@@ -290,6 +375,10 @@ button:disabled {
   <div class="die"><div class="dot"></div></div>
   <div class="die"><div class="dot"></div></div>
   <div class="die"><div class="dot"></div></div>
+</div>
+
+<div id="luckyLabel" class="lucky-label">
+  ✨ LUCKY ROLL ✨
 </div>
 
 <button id="rollButton" type="button" onclick="rollDice()">
@@ -328,23 +417,31 @@ var colors = [
   "#9c27b0"
 ];
 
-var rolls = 0;
 var rollHistory = [];
 var isRolling = false;
 var audioContext = null;
 var soundTimer = null;
+
+var currentTheme = "cosmos";
+var luckyTimer = null;
+var luckyThemeLocked = false;
+var previousTheme = "cosmos";
 
 /* BACKGROUND */
 
 function changeTheme(theme) {
   var allowed = [
     "cosmos","winter","summer",
-    "hell","heaven","king"
+    "hell","heaven","king",
+    "blood","galaxy","matrix"
   ];
 
   if (!allowed.includes(theme)) return;
 
+  currentTheme = theme;
   document.body.className = theme;
+
+  document.getElementById("themeSelect").value = theme;
 
   try {
     localStorage.setItem("x0l3kzzTheme", theme);
@@ -357,10 +454,46 @@ try {
   var savedTheme = localStorage.getItem("x0l3kzzTheme");
 
   if (savedTheme) {
-    changeTheme(savedTheme);
-    document.getElementById("themeSelect").value = savedTheme;
+    var allowedThemes = [
+      "cosmos","winter","summer",
+      "hell","heaven","king",
+      "blood","galaxy","matrix"
+    ];
+
+    if (allowedThemes.includes(savedTheme)) {
+      changeTheme(savedTheme);
+    }
   }
 } catch(e) {}
+
+/* LUCKY BACKGROUND */
+
+function activateLuckyBackground() {
+
+  previousTheme = currentTheme;
+  luckyThemeLocked = true;
+
+  document.body.className = "gold";
+
+  // GOLD cannot be manually selected.
+  // The user can switch to any other background.
+
+  if (luckyTimer) {
+    clearTimeout(luckyTimer);
+  }
+
+  luckyTimer = setTimeout(function() {
+
+    if (document.body.classList.contains("gold")) {
+      document.body.className = previousTheme;
+      document.getElementById("themeSelect").value = previousTheme;
+      currentTheme = previousTheme;
+    }
+
+    luckyTimer = null;
+
+  }, 180000);
+}
 
 /* SOUND */
 
@@ -378,6 +511,7 @@ function startSound() {
     }
 
     soundTimer = setInterval(function() {
+
       if (!audioContext) return;
 
       var oscillator = audioContext.createOscillator();
@@ -412,6 +546,7 @@ function startSound() {
 }
 
 function stopSound() {
+
   if (soundTimer) {
     clearInterval(soundTimer);
     soundTimer = null;
@@ -423,37 +558,49 @@ function stopSound() {
   }
 }
 
+/* SHUFFLE */
+
+function shuffle(array) {
+
+  for (var i = array.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+
+    var temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+
+  return array;
+}
+
 /* GENERATE RESULT */
 
-function generateResult() {
-  rolls++;
+function generateResult(isLucky) {
 
-  var special = rolls % 9 === 0;
-
-  var amount = special
-    ? 3 + Math.floor(Math.random() * 2)
-    : 2 + Math.floor(Math.random() * 2);
-
-  var pool = colors.slice();
-  for (var i = pool.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var temp = pool[i];
-    pool[i] = pool[j];
-    pool[j] = temp;
-  }
-
-  var selected = pool.slice(0, amount);
   var result = [];
 
-  for (var i = 0; i < 4; i++) {
-    result.push(selected[i % amount]);
-  }
+  if (isLucky) {
 
-  for (var i = result.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var temp = result[i];
-    result[i] = result[j];
-    result[j] = temp;
+    // All four colors are guaranteed to be different.
+
+    var pool = shuffle(colors.slice());
+
+    result = pool.slice(0, 4);
+
+  } else {
+
+    // Normal roll: 2 or 3 different colors.
+
+    var amount = 2 + Math.floor(Math.random() * 2);
+
+    var pool = shuffle(colors.slice());
+    var selected = pool.slice(0, amount);
+
+    for (var i = 0; i < 4; i++) {
+      result.push(selected[i % amount]);
+    }
+
+    shuffle(result);
   }
 
   return result;
@@ -461,8 +608,12 @@ function generateResult() {
 
 /* UPDATE HISTORY */
 
-function updateHistory(result) {
-  rollHistory.unshift(result.slice());
+function updateHistory(result, isLucky) {
+
+  rollHistory.unshift({
+    colors: result.slice(),
+    lucky: isLucky
+  });
 
   if (rollHistory.length > 25) {
     rollHistory.pop();
@@ -471,13 +622,20 @@ function updateHistory(result) {
   var html = "";
 
   for (var i = 0; i < rollHistory.length; i++) {
+
     html += '<div class="history-item">';
+
+    if (rollHistory[i].lucky) {
+      html += '<div class="history-lucky">✨ LUCKY ROLL ✨</div>';
+    }
+
     html += '<div class="history-roll">';
 
     for (var j = 0; j < 4; j++) {
+
       html +=
         '<div class="history-die" style="background:' +
-        rollHistory[i][j] +
+        rollHistory[i].colors[j] +
         '"></div>';
     }
 
@@ -490,6 +648,7 @@ function updateHistory(result) {
 /* ROLL DICE */
 
 function rollDice() {
+
   if (isRolling) return;
 
   isRolling = true;
@@ -497,34 +656,69 @@ function rollDice() {
   var button = document.getElementById("rollButton");
   var screen = document.getElementById("rollScreen");
   var dice = document.querySelectorAll(".die");
+  var rollingDice = document.querySelectorAll(".rolling-die");
+  var luckyLabel = document.getElementById("luckyLabel");
 
   button.disabled = true;
 
+  // 5% chance
+
+  var isLucky = Math.random() < 0.05;
+
+  // Remove previous glow
+
   dice.forEach(function(die) {
+    die.classList.remove("lucky-glow");
     die.style.backgroundColor = "#858585";
   });
+
+  rollingDice.forEach(function(die) {
+    die.classList.toggle("lucky-glow", isLucky);
+  });
+
+  luckyLabel.classList.remove("active");
+
+  if (isLucky) {
+    luckyLabel.classList.add("active");
+  }
 
   screen.classList.add("active");
 
   startSound();
 
-  var result = generateResult();
+  var result = generateResult(isLucky);
+
+  // Animation lasts exactly 1 second.
 
   setTimeout(function() {
+
     stopSound();
 
     dice.forEach(function(die, i) {
+
       die.style.backgroundColor = result[i];
+
+      if (isLucky) {
+        die.classList.add("lucky-glow");
+      }
     });
 
-    updateHistory(result);
+    updateHistory(result, isLucky);
 
     screen.classList.remove("active");
+
+    rollingDice.forEach(function(die) {
+      die.classList.remove("lucky-glow");
+    });
+
+    if (isLucky) {
+      activateLuckyBackground();
+    }
 
     button.disabled = false;
     isRolling = false;
 
-  }, 1500);
+  }, 1000);
 }
 
 </script>
