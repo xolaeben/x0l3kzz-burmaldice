@@ -1,10 +1,11 @@
+`html
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>X0L3KZZ DICE</title>
-
 <style>
 * { box-sizing: border-box; }
 
@@ -23,39 +24,32 @@ body {
 }
 
 /* BACKGROUNDS */
-
 body.cosmos {
   background-image: linear-gradient(#08051a66,#08051a99),
   url("https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1600");
 }
-
 body.winter {
   background-image: linear-gradient(#05234133,#05234166),
   url("https://images.unsplash.com/photo-1418985991508-e47386d96a71?w=1600");
 }
-
 body.summer {
   background-image: linear-gradient(#32200022,#32200055),
   url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600");
 }
-
 body.hell {
   background-image: linear-gradient(#28000044,#28000099),
   url("https://images.unsplash.com/photo-1475738198235-4b30fc6a2d9c?w=1600");
 }
-
 body.heaven {
   background-image: linear-gradient(#1e325522,#1e325544),
   url("https://images.unsplash.com/photo-1534088568595-a066f410bcda?w=1600");
 }
-
 body.king {
   background-image: linear-gradient(#10051c44,#10051c88),
   url("https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1600");
 }
 
 /* GOLD */
-
 body.gold {
   background-image:
   radial-gradient(ellipse at center, #8a6415aa, #241400ee),
@@ -64,7 +58,6 @@ body.gold {
 }
 
 /* HEADER */
-
 h1 {
   font-size: clamp(30px, 7vw, 48px);
   letter-spacing: 4px;
@@ -74,29 +67,24 @@ h1 {
                3px 3px 4px black;
   margin: 15px 0 25px;
 }
-
 body.king h1 {
   color: #ffd76b;
   text-shadow: 0 0 15px gold, 0 0 30px orange;
 }
-
 body.gold h1 {
   color: #fff1a8;
   text-shadow: 0 0 15px gold, 0 0 30px orange;
 }
 
 /* BACKGROUND SELECTOR */
-
 .theme-box {
   margin: 15px auto 25px;
 }
-
 .theme-box h2 {
   font-size: 19px;
   letter-spacing: 2px;
   text-shadow: 2px 2px 4px black;
 }
-
 select {
   width: 230px;
   max-width: 90%;
@@ -110,7 +98,6 @@ select {
 }
 
 /* LAYOUT */
-
 .layout {
   display: flex;
   justify-content: center;
@@ -118,21 +105,18 @@ select {
   gap: 25px;
   flex-wrap: wrap;
 }
-
 main {
   width: 100%;
   max-width: 440px;
 }
 
 /* DICE */
-
 .dice {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 8px;
   margin: 30px auto;
 }
-
 .die {
   aspect-ratio: 1;
   min-width: 0;
@@ -142,7 +126,6 @@ main {
   align-items: center;
   background: white;
 }
-
 .dot {
   width: 20px;
   height: 20px;
@@ -151,15 +134,10 @@ main {
 }
 
 /* LUCKY GLOW */
-
 .die.lucky-glow {
-  box-shadow:
-    0 0 10px gold,
-    0 0 25px gold,
-    0 0 45px orange;
+  box-shadow: 0 0 10px gold, 0 0 25px gold, 0 0 45px orange;
   outline: 3px solid #ffdf70;
 }
-
 .lucky-label {
   display: none;
   color: #ffe28a;
@@ -169,13 +147,11 @@ main {
   margin: 10px;
   text-shadow: 0 0 10px gold, 0 0 20px orange;
 }
-
 .lucky-label.active {
   display: block;
 }
 
 /* BUTTON */
-
 button {
   padding: 15px 35px;
   background: #17121f;
@@ -186,14 +162,12 @@ button {
   font-weight: bold;
   cursor: pointer;
 }
-
 button:disabled {
   opacity: .5;
   cursor: wait;
 }
 
 /* HISTORY */
-
 .history {
   margin: 25px auto;
   padding: 12px;
@@ -201,11 +175,9 @@ button:disabled {
   border: 1px solid rgba(255,255,255,.3);
   border-radius: 12px;
 }
-
 .history h2 {
   text-shadow: 2px 2px 4px black;
 }
-
 .history-item {
   display: flex;
   justify-content: center;
@@ -213,35 +185,31 @@ button:disabled {
   flex-direction: column;
   padding: 9px;
   border-bottom: 1px solid rgba(255,255,255,.25);
-}
-
+  }
 .history-roll {
   display: flex;
   justify-content: center;
   gap: 7px;
 }
-
 .history-die {
   width: 27px;
   height: 27px;
   border-radius: 6px;
   border: 2px solid white;
 }
-  .history-lucky {
+.history-lucky {
   color: gold;
   font-size: 13px;
   font-weight: bold;
   margin-bottom: 5px;
   text-shadow: 0 0 8px orange;
 }
-
 .phrases img {
   width: 230px;
   max-width: 90vw;
 }
 
 /* ROLL SCREEN */
-
 #rollScreen {
   display: none;
   position: fixed;
@@ -254,18 +222,15 @@ button:disabled {
   align-items: center;
   padding: 20px;
 }
-
 #rollScreen.active {
   display: flex;
 }
-
 .rolling-dice {
   width: min(440px, 100%);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 8px;
 }
-
 .rolling-die {
   aspect-ratio: 1;
   border-radius: 14px;
@@ -275,42 +240,23 @@ button:disabled {
   align-items: center;
   animation: shake .16s infinite alternate;
 }
-
 .rolling-die.lucky-glow {
-  box-shadow:
-    0 0 12px gold,
-    0 0 30px orange;
+  box-shadow: 0 0 12px gold, 0 0 30px orange;
   outline: 3px solid gold;
 }
-
-.rolling-die:nth-child(2) {
-  animation-delay: .04s;
-}
-
-.rolling-die:nth-child(3) {
-  animation-delay: .08s;
-}
-
-.rolling-die:nth-child(4) {
-  animation-delay: .12s;
-}
-
+.rolling-die:nth-child(2) { animation-delay: .04s; }
+.rolling-die:nth-child(3) { animation-delay: .08s; }
+.rolling-die:nth-child(4) { animation-delay: .12s; }
 .rolling-dot {
   width: 20px;
   height: 20px;
   border-radius: 50%;
   background: white;
 }
-
 @keyframes shake {
-  from {
-    transform: translateY(-5px) rotate(-4deg);
-  }
-  to {
-    transform: translateY(5px) rotate(4deg);
-  }
+  from { transform: translateY(-5px) rotate(-4deg); }
+  to { transform: translateY(5px) rotate(4deg); }
 }
-
 @media(max-width:650px) {
   .layout {
     flex-direction: column;
@@ -326,7 +272,6 @@ button:disabled {
 
 <div class="theme-box">
   <h2>BACKGROUND</h2>
-
   <select id="themeSelect" onchange="changeTheme(this.value)">
     <option value="cosmos">🌌 COSMOS</option>
     <option value="winter">❄️ WINTER</option>
@@ -396,12 +341,10 @@ var soundTimer = null;
 
 var currentTheme = "cosmos";
 var luckyTimer = null;
-var previousTheme = "cosmos";
 
 /* BACKGROUND */
 
 function changeTheme(theme) {
-
   var allowed = [
     "cosmos","winter","summer",
     "hell","heaven","king"
@@ -411,7 +354,6 @@ function changeTheme(theme) {
 
   currentTheme = theme;
   document.body.className = theme;
-
   document.getElementById("themeSelect").value = theme;
 
   try {
@@ -422,46 +364,34 @@ function changeTheme(theme) {
 /* LOAD BACKGROUND */
 
 try {
-
   var savedTheme = localStorage.getItem("x0l3kzzTheme");
 
   if (savedTheme) {
     changeTheme(savedTheme);
   }
-
 } catch(e) {}
 
 /* LUCKY BACKGROUND */
 
 function activateLuckyBackground() {
-
-  previousTheme = currentTheme;
-
   document.body.className = "gold";
 
   if (luckyTimer) {
     clearTimeout(luckyTimer);
   }
-
   luckyTimer = setTimeout(function() {
-
     if (document.body.classList.contains("gold")) {
-
       document.body.className = currentTheme;
-
       document.getElementById("themeSelect").value = currentTheme;
     }
     luckyTimer = null;
-
   }, 180000);
 }
 
 /* SOUND */
 
 function startSound() {
-
   try {
-
     var AudioContextClass =
       window.AudioContext || window.webkitAudioContext;
 
@@ -474,7 +404,6 @@ function startSound() {
     }
 
     soundTimer = setInterval(function() {
-
       if (!audioContext) return;
 
       var oscillator = audioContext.createOscillator();
@@ -487,10 +416,7 @@ function startSound() {
         audioContext.currentTime
       );
 
-      gain.gain.setValueAtTime(
-        0.045,
-        audioContext.currentTime
-      );
+      gain.gain.setValueAtTime(0.045, audioContext.currentTime);
 
       gain.gain.exponentialRampToValueAtTime(
         0.001,
@@ -502,14 +428,12 @@ function startSound() {
 
       oscillator.start();
       oscillator.stop(audioContext.currentTime + 0.07);
-
     }, 85);
 
   } catch(e) {}
 }
 
 function stopSound() {
-
   if (soundTimer) {
     clearInterval(soundTimer);
     soundTimer = null;
@@ -524,9 +448,7 @@ function stopSound() {
 /* SHUFFLE */
 
 function shuffle(array) {
-
   for (var i = array.length - 1; i > 0; i--) {
-
     var j = Math.floor(Math.random() * (i + 1));
 
     var temp = array[i];
@@ -540,21 +462,13 @@ function shuffle(array) {
 /* GENERATE RESULT */
 
 function generateResult(isLucky, guaranteed) {
-
   var result = [];
 
   if (isLucky || guaranteed) {
-
-    // Four guaranteed different colors.
-
     var pool = shuffle(colors.slice());
-
     result = pool.slice(0, 4);
 
   } else {
-
-    // Normal roll: 2 or 3 different colors.
-
     var amount = 2 + Math.floor(Math.random() * 2);
 
     var pool = shuffle(colors.slice());
@@ -572,12 +486,10 @@ function generateResult(isLucky, guaranteed) {
 
 /* UPDATE HISTORY */
 
-function updateHistory(result, isLucky, guaranteed) {
-
+function updateHistory(result, isLucky) {
   rollHistory.unshift({
     colors: result.slice(),
-    lucky: isLucky,
-    guaranteed: guaranteed
+    lucky: isLucky
   });
 
   if (rollHistory.length > 25) {
@@ -587,19 +499,15 @@ function updateHistory(result, isLucky, guaranteed) {
   var html = "";
 
   for (var i = 0; i < rollHistory.length; i++) {
-
     html += '<div class="history-item">';
 
     if (rollHistory[i].lucky) {
       html += '<div class="history-lucky">✨ LUCKY ROLL ✨</div>';
-    } else if (rollHistory[i].guaranteed) {
-      html += '<div class="history-lucky">
     }
 
     html += '<div class="history-roll">';
 
     for (var j = 0; j < 4; j++) {
-
       html +=
         '<div class="history-die" style="background:' +
         rollHistory[i].colors[j] +
@@ -615,7 +523,6 @@ function updateHistory(result, isLucky, guaranteed) {
 /* ROLL DICE */
 
 function rollDice() {
-
   if (isRolling) return;
 
   isRolling = true;
@@ -629,29 +536,21 @@ function rollDice() {
 
   button.disabled = true;
 
-  // Count every roll.
-
   rolls++;
 
   // 3% Lucky Roll chance.
-
   var isLucky = Math.random() < 0.03;
 
   // Every sixth roll guarantees four different colors.
-
   var guaranteed = rolls % 6 === 0;
 
   dice.forEach(function(die) {
-
     die.classList.remove("lucky-glow");
     die.style.backgroundColor = "#858585";
-
   });
 
   rollingDice.forEach(function(die) {
-
     die.classList.toggle("lucky-glow", isLucky);
-
   });
 
   luckyLabel.classList.remove("active");
@@ -667,9 +566,7 @@ function rollDice() {
   var result = generateResult(isLucky, guaranteed);
 
   // Animation: exactly 1 second.
-
   setTimeout(function() {
-
     stopSound();
 
     dice.forEach(function(die, i) {
@@ -678,10 +575,8 @@ function rollDice() {
       if (isLucky) {
         die.classList.add("lucky-glow");
       }
-
     });
-
-    updateHistory(result, isLucky, guaranteed);
+    updateHistory(result, isLucky);
 
     screen.classList.remove("active");
 
@@ -703,3 +598,4 @@ function rollDice() {
 
 </body>
 </html>
+`
