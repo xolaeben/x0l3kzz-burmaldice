@@ -1,5 +1,3 @@
-`html
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -8,594 +6,238 @@
 <title>X0L3KZZ DICE</title>
 <style>
 * { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  padding: 20px;
-  font-family: Arial, sans-serif;
-  text-align: center;
-  color: white;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-color: #15102e;
-}
-
-/* BACKGROUNDS */
-body.cosmos {
-  background-image: linear-gradient(#08051a66,#08051a99),
-  url("https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1600");
-}
-body.winter {
-  background-image: linear-gradient(#05234133,#05234166),
-  url("https://images.unsplash.com/photo-1418985991508-e47386d96a71?w=1600");
-}
-body.summer {
-  background-image: linear-gradient(#32200022,#32200055),
-  url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600");
-}
-body.hell {
-  background-image: linear-gradient(#28000044,#28000099),
-  url("https://images.unsplash.com/photo-1475738198235-4b30fc6a2d9c?w=1600");
-}
-body.heaven {
-  background-image: linear-gradient(#1e325522,#1e325544),
-  url("https://images.unsplash.com/photo-1534088568595-a066f410bcda?w=1600");
-}
-body.king {
-  background-image: linear-gradient(#10051c44,#10051c88),
-  url("https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1600");
-}
-
-/* GOLD */
-body.gold {
-  background-image:
-  radial-gradient(ellipse at center, #8a6415aa, #241400ee),
-  linear-gradient(135deg,#f9d976,#9c6800);
-  background-color: #8a6415;
-}
-
-/* HEADER */
-h1 {
-  font-size: clamp(30px, 7vw, 48px);
-  letter-spacing: 4px;
-  color: #fff0bd;
-  text-shadow: 0 0 10px #e6b84e,
-               0 0 25px #a34dff,
-               3px 3px 4px black;
-  margin: 15px 0 25px;
-}
-body.king h1 {
-  color: #ffd76b;
-  text-shadow: 0 0 15px gold, 0 0 30px orange;
-}
-body.gold h1 {
-  color: #fff1a8;
-  text-shadow: 0 0 15px gold, 0 0 30px orange;
-}
-
-/* BACKGROUND SELECTOR */
-.theme-box {
-  margin: 15px auto 25px;
-}
-.theme-box h2 {
-  font-size: 19px;
-  letter-spacing: 2px;
-  text-shadow: 2px 2px 4px black;
-}
-select {
-  width: 230px;
-  max-width: 90%;
-  padding: 13px;
-  border: 2px solid white;
-  border-radius: 12px;
-  background: #17152b;
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-/* LAYOUT */
-.layout {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 25px;
-  flex-wrap: wrap;
-}
-main {
-  width: 100%;
-  max-width: 440px;
-}
-
-/* DICE */
-.dice {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-  margin: 30px auto;
-}
-.die {
-  aspect-ratio: 1;
-  min-width: 0;
-  border-radius: 14px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: white;
-}
-.dot {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: white;
-}
-
-/* LUCKY GLOW */
-.die.lucky-glow {
-  box-shadow: 0 0 10px gold, 0 0 25px gold, 0 0 45px orange;
-  outline: 3px solid #ffdf70;
-}
-.lucky-label {
-  display: none;
-  color: #ffe28a;
-  font-weight: bold;
-  font-size: 21px;
-  letter-spacing: 3px;
-  margin: 10px;
-  text-shadow: 0 0 10px gold, 0 0 20px orange;
-}
-.lucky-label.active {
-  display: block;
-}
-
-/* BUTTON */
-button {
-  padding: 15px 35px;
-  background: #17121f;
-  color: white;
-  border: 3px solid white;
-  border-radius: 12px;
-  font-size: 20px;
-  font-weight: bold;
-  cursor: pointer;
-}
-button:disabled {
-  opacity: .5;
-  cursor: wait;
-}
-
-/* HISTORY */
-.history {
-  margin: 25px auto;
-  padding: 12px;
-  background: rgba(0,0,0,.35);
-  border: 1px solid rgba(255,255,255,.3);
-  border-radius: 12px;
-}
-.history h2 {
-  text-shadow: 2px 2px 4px black;
-}
-.history-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding: 9px;
-  border-bottom: 1px solid rgba(255,255,255,.25);
-  }
-.history-roll {
-  display: flex;
-  justify-content: center;
-  gap: 7px;
-}
-.history-die {
-  width: 27px;
-  height: 27px;
-  border-radius: 6px;
-  border: 2px solid white;
-}
-.history-lucky {
-  color: gold;
-  font-size: 13px;
-  font-weight: bold;
-  margin-bottom: 5px;
-  text-shadow: 0 0 8px orange;
-}
-.phrases img {
-  width: 230px;
-  max-width: 90vw;
-}
-
-/* ROLL SCREEN */
-#rollScreen {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: rgba(0,0,0,.08);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
-#rollScreen.active {
-  display: flex;
-}
-.rolling-dice {
-  width: min(440px, 100%);
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-}
-.rolling-die {
-  aspect-ratio: 1;
-  border-radius: 14px;
-  background: #858585;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: shake .16s infinite alternate;
-}
-.rolling-die.lucky-glow {
-  box-shadow: 0 0 12px gold, 0 0 30px orange;
-  outline: 3px solid gold;
-}
+body { margin: 0; min-height: 100vh; padding: 20px; font-family: Arial, sans-serif; text-align: center; color: white; background-size: cover; background-position: center; background-attachment: fixed; background-repeat: no-repeat; background-color: #15102e; }
+body.cosmos { background-image: linear-gradient(#08051a66,#08051a99), url("https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1600"); }
+body.winter { background-image: linear-gradient(#05234133,#05234166), url("https://images.unsplash.com/photo-1418985991508-e47386d96a71?w=1600"); }
+body.summer { background-image: linear-gradient(#32200022,#32200055), url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600"); }
+body.hell { background-image: linear-gradient(#28000044,#28000099), url("https://images.unsplash.com/photo-1475738198235-4b30fc6a2d9c?w=1600"); }
+body.heaven { background-image: linear-gradient(#1e325522,#1e325544), url("https://images.unsplash.com/photo-1534088568595-a066f410bcda?w=1600"); }
+body.king { background-image: linear-gradient(#10051c44,#10051c88), url("https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1600"); }
+body.gold { background-image: radial-gradient(ellipse at center, #8a6415aa, #241400ee), linear-gradient(135deg,#f9d976,#9c6800); background-color: #8a6415; }
+h1 { font-size: clamp(30px, 7vw, 48px); letter-spacing: 4px; color: #fff0bd; text-shadow: 0 0 10px #e6b84e, 0 0 25px #a34dff, 3px 3px 4px black; margin: 15px 0 25px; }
+body.king h1 { color: #ffd76b; text-shadow: 0 0 15px gold, 0 0 30px orange; }
+body.gold h1 { color: #fff1a8; text-shadow: 0 0 15px gold, 0 0 30px orange; }
+.theme-box { margin: 15px auto 25px; }
+.theme-box h2 { font-size: 19px; letter-spacing: 2px; text-shadow: 2px 2px 4px black; }
+select { width: 230px; max-width: 90%; padding: 13px; border: 2px solid white; border-radius: 12px; background: #17152b; color: white; font-size: 16px; font-weight: bold; }
+.layout { display: flex; justify-content: center; align-items: flex-start; gap: 25px; flex-wrap: wrap; }
+main { width: 100%; max-width: 440px; }
+.dice { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 30px auto; }
+.die { aspect-ratio: 1; min-width: 0; border-radius: 14px; display: flex; justify-content: center; align-items: center; background: white; }
+.dot { width: 20px; height: 20px; border-radius: 50%; background: white; }
+.die.lucky-glow { box-shadow: 0 0 10px gold, 0 0 25px gold, 0 0 45px orange; outline: 3px solid #ffdf70; }
+.lucky-label { display: none; color: #ffe28a; font-weight: bold; font-size: 21px; letter-spacing: 3px; margin: 10px; text-shadow: 0 0 10px gold, 0 0 20px orange; }
+.lucky-label.active { display: block; }
+button { padding: 15px 35px; background: #17121f; color: white; border: 3px solid white; border-radius: 12px; font-size: 20px; font-weight: bold; cursor: pointer; }
+button:disabled { opacity: .5; cursor: wait; }
+.history { margin: 25px auto; padding: 12px; background: rgba(0,0,0,.35); border: 1px solid rgba(255,255,255,.3); border-radius: 12px; }
+.history h2 { text-shadow: 2px 2px 4px black; }
+.history-item { display: flex; justify-content: center; align-items: center; flex-direction: column; padding: 9px; border-bottom: 1px solid rgba(255,255,255,.25); }
+.history-roll { display: flex; justify-content: center; gap: 7px; }
+.history-die { width: 27px; height: 27px; border-radius: 6px; border: 2px solid white; }
+.history-lucky { color: gold; font-size: 13px; font-weight: bold; margin-bottom: 5px; text-shadow: 0 0 8px orange; }
+.phrases img { width: 230px; max-width: 90vw; }
+#rollScreen { display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,.08); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); justify-content: center; align-items: center; padding: 20px; }
+  #rollScreen.active { display: flex; }
+.rolling-dice { width: min(440px, 100%); display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.rolling-die { aspect-ratio: 1; border-radius: 14px; background: #858585; display: flex; justify-content: center; align-items: center; animation: shake .16s infinite alternate; }
+.rolling-die.lucky-glow { box-shadow: 0 0 12px gold, 0 0 30px orange; outline: 3px solid gold; }
 .rolling-die:nth-child(2) { animation-delay: .04s; }
 .rolling-die:nth-child(3) { animation-delay: .08s; }
 .rolling-die:nth-child(4) { animation-delay: .12s; }
-.rolling-dot {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: white;
-}
-@keyframes shake {
-  from { transform: translateY(-5px) rotate(-4deg); }
-  to { transform: translateY(5px) rotate(4deg); }
-}
-@media(max-width:650px) {
-  .layout {
-    flex-direction: column;
-    align-items: center;
-  }
-}
+.rolling-dot { width: 20px; height: 20px; border-radius: 50%; background: white; }
+@keyframes shake { from { transform: translateY(-5px) rotate(-4deg); } to { transform: translateY(5px) rotate(4deg); } }
+@media(max-width:650px) { .layout { flex-direction: column; align-items: center; } }
 </style>
 </head>
-
 <body class="cosmos">
-
 <h1>X0L3KZZ DICE</h1>
-
 <div class="theme-box">
-  <h2>BACKGROUND</h2>
-  <select id="themeSelect" onchange="changeTheme(this.value)">
-    <option value="cosmos">🌌 COSMOS</option>
-    <option value="winter">❄️ WINTER</option>
-    <option value="summer">☀️ SUMMER</option>
-    <option value="hell">🔥 HELL</option>
-    <option value="heaven">😇 HEAVEN</option>
-    <option value="king">👑 KING</option>
-    <option value="gold" disabled>🏆 GOLD (LUCKY ONLY)</option>
-  </select>
+<h2>BACKGROUND</h2>
+<select id="themeSelect" onchange="changeTheme(this.value)">
+<option value="cosmos">🌌 COSMOS</option>
+<option value="winter">❄️ WINTER</option>
+<option value="summer">☀️ SUMMER</option>
+<option value="hell">🔥 HELL</option>
+<option value="heaven">😇 HEAVEN</option>
+<option value="king">👑 KING</option>
+<option value="gold" disabled>🏆 GOLD (LUCKY ONLY)</option>
+</select>
 </div>
-
 <div class="layout">
 <main>
-
 <div class="dice">
-  <div class="die"><div class="dot"></div></div>
-  <div class="die"><div class="dot"></div></div>
-  <div class="die"><div class="dot"></div></div>
-  <div class="die"><div class="dot"></div></div>
+<div class="die"><div class="dot"></div></div>
+<div class="die"><div class="dot"></div></div>
+<div class="die"><div class="dot"></div></div>
+<div class="die"><div class="dot"></div></div>
 </div>
-
-<div id="luckyLabel" class="lucky-label">
-  ✨ LUCKY ROLL ✨
-</div>
-
-<button id="rollButton" type="button" onclick="rollDice()">
-  ROLL DICE
-</button>
-
+<div id="luckyLabel" class="lucky-label">✨ LUCKY ROLL ✨</div>
+<button id="rollButton" type="button" onclick="rollDice()">ROLL DICE</button>
 <div class="history">
-  <h2>HISTORY</h2>
-  <div id="history">No rolls yet</div>
+<h2>HISTORY</h2>
+<div id="history">No rolls yet</div>
 </div>
-
 </main>
-
 <aside class="phrases">
-  <img src="dice-phrases.svg" alt="Trading phrases">
+<img src="dice-phrases.svg" alt="Trading phrases">
 </aside>
 </div>
-
 <div id="rollScreen">
-  <div class="rolling-dice">
-    <div class="rolling-die"><div class="rolling-dot"></div></div>
-    <div class="rolling-die"><div class="rolling-dot"></div></div>
-    <div class="rolling-die"><div class="rolling-dot"></div></div>
-    <div class="rolling-die"><div class="rolling-dot"></div></div>
-  </div>
+<div class="rolling-dice">
+<div class="rolling-die"><div class="rolling-dot"></div></div>
+<div class="rolling-die"><div class="rolling-dot"></div></div>
+<div class="rolling-die"><div class="rolling-dot"></div></div>
+<div class="rolling-die"><div class="rolling-dot"></div></div>
 </div>
-
+</div>
 <script>
-
-var colors = [
-  "#f44336",
-  "#ff9800",
-  "#ffeb3b",
-  "#4caf50",
-  "#2196f3",
-  "#9c27b0"
-];
-
+var colors = ["#f44336","#ff9800","#ffeb3b","#4caf50","#2196f3","#9c27b0"];
 var rolls = 0;
 var rollHistory = [];
 var isRolling = false;
 var audioContext = null;
 var soundTimer = null;
-
 var currentTheme = "cosmos";
 var luckyTimer = null;
 
-/* BACKGROUND */
-
 function changeTheme(theme) {
-  var allowed = [
-    "cosmos","winter","summer",
-    "hell","heaven","king"
-  ];
-
-  if (!allowed.includes(theme)) return;
-
-  currentTheme = theme;
-  document.body.className = theme;
-  document.getElementById("themeSelect").value = theme;
-
-  try {
-    localStorage.setItem("x0l3kzzTheme", theme);
-  } catch(e) {}
+var allowed = ["cosmos","winter","summer","hell","heaven","king"];
+if (!allowed.includes(theme)) return;
+currentTheme = theme;
+document.body.className = theme;
+document.getElementById("themeSelect").value = theme;
+try { localStorage.setItem("x0l3kzzTheme", theme); } catch(e) {}
 }
-
-/* LOAD BACKGROUND */
 
 try {
-  var savedTheme = localStorage.getItem("x0l3kzzTheme");
-
-  if (savedTheme) {
-    changeTheme(savedTheme);
-  }
+var savedTheme = localStorage.getItem("x0l3kzzTheme");
+if (savedTheme) changeTheme(savedTheme);
 } catch(e) {}
 
-/* LUCKY BACKGROUND */
-
 function activateLuckyBackground() {
-  document.body.className = "gold";
-
-  if (luckyTimer) {
-    clearTimeout(luckyTimer);
-  }
-  luckyTimer = setTimeout(function() {
-    if (document.body.classList.contains("gold")) {
-      document.body.className = currentTheme;
-      document.getElementById("themeSelect").value = currentTheme;
-    }
-    luckyTimer = null;
-  }, 180000);
+document.body.className = "gold";
+if (luckyTimer) clearTimeout(luckyTimer);
+luckyTimer = setTimeout(function() {
+if (document.body.classList.contains("gold")) {
+document.body.className = currentTheme;
+document.getElementById("themeSelect").value = currentTheme;
 }
-
-/* SOUND */
+luckyTimer = null;
+}, 180000);
+}
 
 function startSound() {
-  try {
-    var AudioContextClass =
-      window.AudioContext || window.webkitAudioContext;
-
-    if (!AudioContextClass) return;
-
-    audioContext = new AudioContextClass();
-
-    if (audioContext.state === "suspended") {
-      audioContext.resume();
-    }
-
-    soundTimer = setInterval(function() {
-      if (!audioContext) return;
-
-      var oscillator = audioContext.createOscillator();
-      var gain = audioContext.createGain();
-
-      oscillator.type = "square";
-
-      oscillator.frequency.setValueAtTime(
-        180 + Math.random() * 350,
-        audioContext.currentTime
-      );
-
-      gain.gain.setValueAtTime(0.045, audioContext.currentTime);
-
-      gain.gain.exponentialRampToValueAtTime(
-        0.001,
-        audioContext.currentTime + 0.07
-      );
-
-      oscillator.connect(gain);
-      gain.connect(audioContext.destination);
-
-      oscillator.start();
-      oscillator.stop(audioContext.currentTime + 0.07);
-    }, 85);
-
-  } catch(e) {}
+try {
+var AudioContextClass = window.AudioContext || window.webkitAudioContext;
+if (!AudioContextClass) return;
+audioContext = new AudioContextClass();
+if (audioContext.state === "suspended") audioContext.resume();
+soundTimer = setInterval(function() {
+if (!audioContext) return;
+var oscillator = audioContext.createOscillator();
+var gain = audioContext.createGain();
+oscillator.type = "square";
+oscillator.frequency.setValueAtTime(180 + Math.random() * 350, audioContext.currentTime);
+gain.gain.setValueAtTime(0.045, audioContext.currentTime);
+gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.07);
+oscillator.connect(gain);
+gain.connect(audioContext.destination);
+oscillator.start();
+oscillator.stop(audioContext.currentTime + 0.07);
+}, 85);
+} catch(e) {}
 }
-
-function stopSound() {
-  if (soundTimer) {
-    clearInterval(soundTimer);
-    soundTimer = null;
-  }
-
-  if (audioContext) {
-    audioContext.close();
-    audioContext = null;
-  }
+  function stopSound() {
+if (soundTimer) { clearInterval(soundTimer); soundTimer = null; }
+if (audioContext) { audioContext.close(); audioContext = null; }
 }
-
-/* SHUFFLE */
 
 function shuffle(array) {
-  for (var i = array.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-
-    var temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
-  }
-
-  return array;
+for (var i = array.length - 1; i > 0; i--) {
+var j = Math.floor(Math.random() * (i + 1));
+var temp = array[i];
+array[i] = array[j];
+array[j] = temp;
 }
-
-/* GENERATE RESULT */
+return array;
+}
 
 function generateResult(isLucky, guaranteed) {
-  var result = [];
-
-  if (isLucky || guaranteed) {
-    var pool = shuffle(colors.slice());
-    result = pool.slice(0, 4);
-
-  } else {
-    var amount = 2 + Math.floor(Math.random() * 2);
-
-    var pool = shuffle(colors.slice());
-    var selected = pool.slice(0, amount);
-
-    for (var i = 0; i < 4; i++) {
-      result.push(selected[i % amount]);
-    }
-
-    shuffle(result);
-  }
-
-  return result;
+var result = [];
+if (isLucky || guaranteed) {
+var pool = shuffle(colors.slice());
+result = pool.slice(0, 4);
+} else {
+var chance = Math.random();
+var amount;
+if (chance < 0.15) amount = 2;
+else if (chance < 0.75) amount = 3;
+else amount = 4;
+var pool = shuffle(colors.slice());
+var selected = pool.slice(0, amount);
+for (var i = 0; i < 4; i++) result.push(selected[i % amount]);
+shuffle(result);
 }
-
-/* UPDATE HISTORY */
+return result;
+}
 
 function updateHistory(result, isLucky) {
-  rollHistory.unshift({
-    colors: result.slice(),
-    lucky: isLucky
-  });
-
-  if (rollHistory.length > 25) {
-    rollHistory.pop();
-  }
-
-  var html = "";
-
-  for (var i = 0; i < rollHistory.length; i++) {
-    html += '<div class="history-item">';
-
-    if (rollHistory[i].lucky) {
-      html += '<div class="history-lucky">✨ LUCKY ROLL ✨</div>';
-    }
-
-    html += '<div class="history-roll">';
-
-    for (var j = 0; j < 4; j++) {
-      html +=
-        '<div class="history-die" style="background:' +
-        rollHistory[i].colors[j] +
-        '"></div>';
-    }
-
-    html += '</div></div>';
-  }
-
-  document.getElementById("history").innerHTML = html;
+rollHistory.unshift({ colors: result.slice(), lucky: isLucky });
+if (rollHistory.length > 25) rollHistory.pop();
+var html = "";
+for (var i = 0; i < rollHistory.length; i++) {
+html += '<div class="history-item">';
+if (rollHistory[i].lucky) html += '<div class="history-lucky">✨ LUCKY ROLL ✨</div>';
+html += '<div class="history-roll">';
+for (var j = 0; j < 4; j++) {
+html += '<div class="history-die" style="background:' + rollHistory[i].colors[j] + '"></div>';
 }
-
-/* ROLL DICE */
+html += '</div></div>';
+}
+document.getElementById("history").innerHTML = html;
+}
 
 function rollDice() {
-  if (isRolling) return;
-
-  isRolling = true;
-
-  var button = document.getElementById("rollButton");
-  var screen = document.getElementById("rollScreen");
-
-  var dice = document.querySelectorAll(".die");
-  var rollingDice = document.querySelectorAll(".rolling-die");
-  var luckyLabel = document.getElementById("luckyLabel");
-
-  button.disabled = true;
-
-  rolls++;
-
-  // 3% Lucky Roll chance.
-  var isLucky = Math.random() < 0.03;
-
-  // Every sixth roll guarantees four different colors.
-  var guaranteed = rolls % 6 === 0;
-
-  dice.forEach(function(die) {
-    die.classList.remove("lucky-glow");
-    die.style.backgroundColor = "#858585";
-  });
-
-  rollingDice.forEach(function(die) {
-    die.classList.toggle("lucky-glow", isLucky);
-  });
-
-  luckyLabel.classList.remove("active");
-
-  if (isLucky) {
-    luckyLabel.classList.add("active");
-  }
-
-  screen.classList.add("active");
-
-  startSound();
-
-  var result = generateResult(isLucky, guaranteed);
-
-  // Animation: exactly 1 second.
-  setTimeout(function() {
-    stopSound();
-
-    dice.forEach(function(die, i) {
-      die.style.backgroundColor = result[i];
-
-      if (isLucky) {
-        die.classList.add("lucky-glow");
-      }
-    });
-    updateHistory(result, isLucky);
-
-    screen.classList.remove("active");
-
-    rollingDice.forEach(function(die) {
-      die.classList.remove("lucky-glow");
-    });
-
-    if (isLucky) {
-      activateLuckyBackground();
-    }
-
-    button.disabled = false;
-    isRolling = false;
-
-  }, 1000);
+if (isRolling) return;
+isRolling = true;
+var button = document.getElementById("rollButton");
+var screen = document.getElementById("rollScreen");
+var dice = document.querySelectorAll(".die");
+var rollingDice = document.querySelectorAll(".rolling-die");
+var luckyLabel = document.getElementById("luckyLabel");
+button.disabled = true;
+rolls++;
+var isLucky = Math.random() < 0.03;
+var guaranteed = rolls % 6 === 0;
+dice.forEach(function(die) {
+die.classList.remove("lucky-glow");
+die.style.backgroundColor = "#858585";
+});
+rollingDice.forEach(function(die) {
+die.classList.toggle("lucky-glow", isLucky);
+});
+luckyLabel.classList.remove("active");
+if (isLucky) luckyLabel.classList.add("active");
+screen.classList.add("active");
+startSound();
+var result = generateResult(isLucky, guaranteed);
+setTimeout(function() {
+stopSound();
+dice.forEach(function(die, i) {
+die.style.backgroundColor = result[i];
+if (isLucky) die.classList.add("lucky-glow");
+});
+updateHistory(result, isLucky);
+screen.classList.remove("active");
+rollingDice.forEach(function(die) {
+die.classList.remove("lucky-glow");
+});
+if (isLucky) activateLuckyBackground();
+button.disabled = false;
+isRolling = false;
+}, 1000);
 }
-
 </script>
-
 </body>
 </html>
-`
